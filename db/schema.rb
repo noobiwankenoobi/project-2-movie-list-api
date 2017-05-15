@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170506201105) do
+ActiveRecord::Schema.define(version: 20170515010744) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,13 +24,28 @@ ActiveRecord::Schema.define(version: 20170506201105) do
   end
 
   create_table "movie_posts", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "title",      null: false
-    t.string   "director",   null: false
-    t.string   "comment"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "user_id",              null: false
+    t.integer  "movie_id",             null: false
+    t.integer  "parent_movie_post_id"
+    t.text     "comment",              null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.index ["movie_id"], name: "index_movie_posts_on_movie_id", using: :btree
+    t.index ["parent_movie_post_id"], name: "index_movie_posts_on_parent_movie_post_id", using: :btree
     t.index ["user_id"], name: "index_movie_posts_on_user_id", using: :btree
+  end
+
+  create_table "movies", force: :cascade do |t|
+    t.integer  "user_id",         null: false
+    t.string   "title",           null: false
+    t.string   "director",        null: false
+    t.string   "writer",          null: false
+    t.string   "cinematographer", null: false
+    t.string   "music",           null: false
+    t.string   "img_url",         null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["user_id"], name: "index_movies_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -44,5 +59,7 @@ ActiveRecord::Schema.define(version: 20170506201105) do
   end
 
   add_foreign_key "examples", "users"
+  add_foreign_key "movie_posts", "movies"
   add_foreign_key "movie_posts", "users"
+  add_foreign_key "movies", "users"
 end

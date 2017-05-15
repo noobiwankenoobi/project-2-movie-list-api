@@ -3,7 +3,7 @@ class MoviePostsController < ProtectedController
 
   # GET /movie_posts
   def index
-    @movie_posts = MoviePost.where 'user_id= ?', @current_user.id
+    @movie_posts = MoviePost.all
 
     render json: @movie_posts
   end
@@ -48,6 +48,7 @@ class MoviePostsController < ProtectedController
 
     # Only allow a trusted parameter "white list" through.
     def movie_post_params
-      params.require(:movie_post).permit(:title, :director, :comment)
+      params.require(:movie_post).permit(:movie_id, :user_id,
+                                         :parent_movie_post_id, :comment)
     end
 end
