@@ -3,5 +3,6 @@ class MoviePost < ApplicationRecord
                              foreign_key: 'parent_movie_post_id',
                              dependent: :destroy
   belongs_to :parent_movie_post, class_name: 'MoviePost'
+  belongs_to :movie
   belongs_to :user
 end
