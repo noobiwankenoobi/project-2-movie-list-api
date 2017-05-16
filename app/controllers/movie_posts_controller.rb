@@ -40,15 +40,16 @@ class MoviePostsController < ProtectedController
     @movie_post.destroy
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_movie_post
-      @movie_post = MoviePost.find(params[:id])
-    end
+private
 
-    # Only allow a trusted parameter "white list" through.
-    def movie_post_params
-      params.require(:movie_post).permit(:movie_id, :user_id,
-                                         :parent_movie_post_id, :comment)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_movie_post
+    @movie_post = MoviePost.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def movie_post_params
+    params.require(:movie_post).permit(:movie_id, :user_id,
+                                       :parent_movie_post_id, :comment)
+  end
 end
