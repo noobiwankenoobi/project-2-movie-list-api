@@ -49,7 +49,10 @@ class MoviesController < ProtectedController
 
   # Only allow a trusted parameter "white list" through.
   def movie_params
-    params.require(:movie).permit(:user_id, :title, :director, :writer,
-                                  :cinematographer, :music, :img_url)
+    params.require(:movie).permit(:user_id, :title, :title_imdb_url,
+                                  :title_rotten_url, :director,
+                                  :director_imdb_url, :writer, :writer_imdb_url,
+                                  :cinematographer, :cinematographer_imdb_url,
+                                  :music, :music_imdb_url, :img_url)
   end
 end

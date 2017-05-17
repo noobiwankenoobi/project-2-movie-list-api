@@ -36,15 +36,21 @@ ActiveRecord::Schema.define(version: 20170515010744) do
   end
 
   create_table "movies", force: :cascade do |t|
-    t.integer  "user_id",         null: false
-    t.string   "title",           null: false
-    t.string   "director",        null: false
-    t.string   "writer",          null: false
-    t.string   "cinematographer", null: false
-    t.string   "music",           null: false
-    t.string   "img_url",         null: false
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.integer  "user_id",                  null: false
+    t.string   "title",                    null: false
+    t.string   "title_imdb_url",           null: false
+    t.string   "title_rotten_url"
+    t.string   "director",                 null: false
+    t.string   "director_imdb_url"
+    t.string   "writer",                   null: false
+    t.string   "writer_imdb_url"
+    t.string   "cinematographer",          null: false
+    t.string   "cinematographer_imdb_url"
+    t.string   "music",                    null: false
+    t.string   "music_imdb_url"
+    t.string   "img_url",                  null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.index ["user_id"], name: "index_movies_on_user_id", using: :btree
   end
 
